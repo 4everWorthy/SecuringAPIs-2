@@ -1,5 +1,6 @@
 package com.example.securingapis2.security;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -26,8 +27,8 @@ class OAuth2ConfigTest {
 
     @BeforeEach
     void setUp() {
-        // Mock validateToken method to return true for any valid token
-        when(jwtTokenUtil.validateToken(anyString(), anyString())).thenReturn(true);
+        // Mocking the validateToken method
+        when(jwtTokenUtil.validateToken(anyString(), any())).thenReturn(true);
     }
 
     @Test
@@ -50,7 +51,10 @@ class OAuth2ConfigTest {
 
     @Test
     void shouldAllowAccessToProtectedEndpointWithAuthentication() throws Exception {
-        mockMvc.perform(get("/api/protected").header("Authorization", "Bearer valid_token_here"))
+        String token = "Bearer your_jwt_token_here";
+
+        mockMvc.perform(get("/api/protected")
+                        .header("Authorization", token))
                 .andExpect(status().isOk());
     }
 }

@@ -4,11 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-
-class SecuringApIs2ApplicationTests {
+class SecuringApis2ApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// This test simply checks that the application context loads successfully.
 	}
-
 }
